@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import Navbar from '@/components/Navbar.vue'
 </script>
 
 <template>
-  <header></header>
+  <Navbar />
 
   <main>
+    <RouterView />
     <RouterView />
   </main>
 
@@ -25,5 +27,10 @@ body {
   min-height: 100%;
   display: grid;
   grid-template: auto 1fr auto / 1fr min(100ch, 100%) 1fr;
+
+  header,
+  main {
+    grid-column: 2;
+  }
 }
 </style>
