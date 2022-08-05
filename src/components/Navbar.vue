@@ -5,11 +5,13 @@ import NavbarLink from './NavbarLink.vue'
 
 <template>
   <header>
-    <nav>
-      <NavbarLink href="/">👌🏼 Home</NavbarLink>
-      <NavbarLink href="/comics">🎉 Comics</NavbarLink>
-      <NavbarLink href="/contact">🥸 Contact</NavbarLink>
-    </nav>
+    <div id="navbar">
+      <nav>
+        <NavbarLink href="/">👌🏼 Home</NavbarLink>
+        <NavbarLink href="/comics">🎉 Comics</NavbarLink>
+        <NavbarLink href="/contact">🥸 Contact</NavbarLink>
+      </nav>
+    </div>
   </header>
 </template>
 
@@ -17,8 +19,11 @@ import NavbarLink from './NavbarLink.vue'
 header {
   // top: 1rem;
   // position: sticky;
+  padding-top: 1rem;
+  // padding-bottom: 0;
+}
+#navbar {
   width: 100%;
-  margin: 1rem;
   padding: 1rem;
   background-color: var(--primary);
   border-radius: 10px;

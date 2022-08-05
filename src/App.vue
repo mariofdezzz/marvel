@@ -6,10 +6,7 @@ import Navbar from '@/components/Navbar.vue'
 <template>
   <Navbar />
 
-  <main>
-    <RouterView />
-    <RouterView />
-  </main>
+  <RouterView />
 
   <footer></footer>
 </template>
@@ -26,7 +23,9 @@ body {
   width: 100%;
   min-height: 100%;
   display: grid;
-  grid-template: auto 1fr auto / 1fr min(100ch, 100%) 1fr;
+  grid-template: auto 1fr auto / 1fr min(100ch, calc(100% - 2rem)) 1fr;
+  row-gap: 2rem;
+  column-gap: 1rem;
 
   header,
   main {

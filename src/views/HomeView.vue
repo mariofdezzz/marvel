@@ -1,9 +1,43 @@
 <script setup lang="ts">
-import TheWelcome from '@/components/TheWelcome.vue'
+import { useComicsStore } from '@/stores/comics/index.js'
+import { useIntersectionObserver } from '@vueuse/core'
+import { computed, ref } from 'vue'
+import ComicCard from '@/components/ComicCard.vue'
+
+const comicsStore = useComicsStore()
+const lastImage = ref(null)
+
+const comics = computed(() => {
+  return comicsStore.comics
+})
+
+useIntersectionObserver(
+  lastImage,
+  () => {
+    console.log('🎉')
+    comicsStore.fetchMore()
+  },
+  { rootMargin: '-300px 0px 0px 0px' } // FIX: Not working?
+)
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <ComicCard
+      v-for="(comic, idx) of comics"
+      :key="idx"
+      :comic="comic"
+    ></ComicCard>
+
+    <div ref="lastImage"></div>
   </main>
 </template>
+
+<style scoped lang="scss">
+main {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}
+</style>
