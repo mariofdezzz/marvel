@@ -1,10 +1,11 @@
 <script setup lang="ts">
+import ComicCardSkeleton from '@/components/ComicCard/ComicCardSkeleton.vue'
 import { useComicsStore } from '@/stores/comics/index.js'
 import { useIntersectionObserver } from '@vueuse/core'
 import { computed, ref } from 'vue'
-import ComicCard from '../components/ComicCard/ComicCard.vue'
 import ComicCardCaption from '../components/ComicCard/ComicCardCaption.vue'
 import ComicCardThumbnail from '../components/ComicCard/ComicCardThumbnail.vue'
+import ComicCard from '../components/ComicCard/ComicCard.vue'
 
 const comicsStore = useComicsStore()
 const lastImage = ref(null)
@@ -25,6 +26,10 @@ useIntersectionObserver(
 
 <template>
   <main>
+    <ComicCard>
+      <ComicCardSkeleton />
+    </ComicCard>
+
     <ComicCard v-for="(comic, idx) of comics" :key="idx" :title="comic.title">
       <ComicCardThumbnail :comic="comic" />
 
