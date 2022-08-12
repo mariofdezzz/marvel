@@ -11,15 +11,17 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
+@import '@/assets/styles/variables.scss';
+
 a {
   padding: 0.25rem 0.5rem;
   border-radius: 10px;
   border: 2px solid transparent;
-  color: var(--on-primary);
+  color: $on-bg-primary;
   text-decoration: none;
 
   &:hover {
-    border-color: var(--on-primary);
+    color: $primary;
   }
 }
 </style>

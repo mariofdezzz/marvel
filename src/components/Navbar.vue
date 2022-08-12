@@ -16,23 +16,27 @@ import NavbarLink from './NavbarLink.vue'
 </template>
 
 <style scoped lang="scss">
+@import '@/assets/styles/variables.scss';
+
 header {
-  // top: 1rem;
-  // position: sticky;
-  padding-top: 1rem;
-  // padding-bottom: 0;
+  top: 0;
+  position: sticky;
+  z-index: 1;
 }
+
 #navbar {
   width: 100%;
   padding: 1rem;
-  background-color: var(--primary);
-  border-radius: 10px;
-  font-size: 18px;
+  background-color: $bg-primary;
+  border-bottom: 1px solid $on-bg-primary;
+  display: grid;
+  grid-template: auto 1fr auto / 1fr min(100ch, calc(100% - 2rem)) 1fr;
 
   nav {
     display: flex;
     gap: 1rem;
-    justify-content: center;
+    grid-column: 2;
+    font-size: 18px;
   }
 }
 </style>

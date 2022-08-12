@@ -27,7 +27,10 @@ body {
   row-gap: 2rem;
   column-gap: 1rem;
 
-  header,
+  header {
+    grid-column: 1/4;
+  }
+
   main {
     grid-column: 2;
   }
