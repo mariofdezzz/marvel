@@ -29,7 +29,9 @@ footer {
     font-size: 14px;
     font-weight: 500;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 0.5rem 1rem;
 
     a {
       font-weight: 700;
