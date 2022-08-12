@@ -39,7 +39,7 @@ header {
 
   nav {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
     grid-column: 2;
     font-size: 18px;
     align-items: center;

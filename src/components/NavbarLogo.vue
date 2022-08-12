@@ -16,6 +16,7 @@
   align-items: center;
   padding: 0.4rem;
   font-size: 1.2em;
+  margin-right: 1rem;
 
   & > span {
     transform: scaleY(2);
