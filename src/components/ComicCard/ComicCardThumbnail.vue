@@ -18,7 +18,6 @@ const imageSrc = computed(() => {
 
 <style scoped lang="scss">
 img {
-  width: auto;
-  height: 300px;
+  aspect-ratio: 2/3;
 }
 </style>

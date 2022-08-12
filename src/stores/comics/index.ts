@@ -1,4 +1,5 @@
 import { MarvelApi } from '@/apis'
+import type { Comic } from '@/apis/marvel/types/comics'
 import { OrderBy } from '@/apis/marvel/types/comics/methods'
 import { defineStore } from 'pinia'
 import type { ComicState } from './types'
@@ -9,10 +10,14 @@ export const useComicsStore = defineStore({
   id: 'comics',
   state: (): ComicState => ({
     isLoading: false,
-    comics: [],
+    _comics: [],
   }),
   getters: {
-    count: (state) => state.comics.length,
+    count: (state) => state._comics.length,
+    comics: (state): Comic[] | null[] =>
+      state.isLoading
+        ? state._comics.concat(new Array(20).fill(null))
+        : state._comics,
   },
   actions: {
     async fetchMore() {
@@ -25,7 +30,7 @@ export const useComicsStore = defineStore({
         offset: this.count,
       })
 
-      this.comics.push(...comics)
+      this._comics.push(...comics)
       this.isLoading = false
     },
   },

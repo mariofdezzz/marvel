@@ -3,9 +3,9 @@ import ComicCardSkeleton from '@/components/ComicCard/ComicCardSkeleton.vue'
 import { useComicsStore } from '@/stores/comics/index.js'
 import { useIntersectionObserver } from '@vueuse/core'
 import { computed, ref } from 'vue'
+import ComicCard from '../components/ComicCard/ComicCard.vue'
 import ComicCardCaption from '../components/ComicCard/ComicCardCaption.vue'
 import ComicCardThumbnail from '../components/ComicCard/ComicCardThumbnail.vue'
-import ComicCard from '../components/ComicCard/ComicCard.vue'
 
 const comicsStore = useComicsStore()
 const lastImage = ref(null)
@@ -17,34 +17,36 @@ const comics = computed(() => {
 useIntersectionObserver(
   lastImage,
   () => {
-    console.log('🎉')
     comicsStore.fetchMore()
   },
-  { rootMargin: '-300px 0px 0px 0px' } // FIX: Not working?
+  { rootMargin: '400px' }
 )
 </script>
 
 <template>
   <main>
-    <ComicCard>
-      <ComicCardSkeleton />
+    <ComicCard v-for="(comic, idx) of comics" :key="idx" :title="comic?.title">
+      <ComicCardSkeleton v-if="comic === null" />
+
+      <ComicCardThumbnail v-if="comic !== null" :comic="comic" />
+
+      <ComicCardCaption v-if="comic !== null" :comic="comic" />
     </ComicCard>
-
-    <ComicCard v-for="(comic, idx) of comics" :key="idx" :title="comic.title">
-      <ComicCardThumbnail :comic="comic" />
-
-      <ComicCardCaption :comic="comic" />
-    </ComicCard>
-
-    <div ref="lastImage"></div>
   </main>
+  <div ref="lastImage" id="gallery-end"></div>
 </template>
 
 <style scoped lang="scss">
 main {
   position: relative;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-gap: 1rem;
+}
+</style>
+
+<style lang="scss">
+#app > #gallery-end {
+  grid-column: 2;
 }
 </style>

@@ -19,8 +19,10 @@ figure {
   flex-direction: column;
   gap: 0.5rem;
   padding: 20px;
-  // width: 100%;
-  // height: 100%;
+  width: 100%; // Makes skeleton as wide as possible always
+  max-width: 300px;
+  height: fit-content;
+  justify-self: center;
   background-color: $bg-primary;
   border: 1px solid $on-bg;
   cursor: pointer;
