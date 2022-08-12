@@ -1,15 +1,17 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import NavbarLink from './NavbarLink.vue'
+import NavbarLogo from './NavbarLogo.vue'
 </script>
 
 <template>
   <header>
     <div id="navbar">
       <nav>
-        <NavbarLink href="/">👌🏼 Home</NavbarLink>
-        <NavbarLink href="/comics">🎉 Comics</NavbarLink>
-        <NavbarLink href="/contact">🥸 Contact</NavbarLink>
+        <NavbarLink href="/">
+          <NavbarLogo />
+        </NavbarLink>
+        <NavbarLink href="/comics">Comics</NavbarLink>
       </nav>
     </div>
   </header>
@@ -37,6 +39,7 @@ header {
     gap: 1rem;
     grid-column: 2;
     font-size: 18px;
+    align-items: center;
   }
 }
 </style>
