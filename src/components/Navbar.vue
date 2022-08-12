@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import NavbarLink from './NavbarLink.vue'
-import NavbarLogo from './NavbarLogo.vue'
+import NavbarLink from './Navbar/NavbarLink.vue'
+import NavbarLogo from './Navbar/NavbarLogo.vue'
 </script>
 
 <template>
