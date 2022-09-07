@@ -11,6 +11,7 @@ export const useComicsStore = defineStore({
   state: (): ComicState => ({
     isLoading: false,
     _comics: [],
+    orderBy: OrderBy.Desc.focDate,
   }),
   getters: {
     count: (state) => state._comics.length,
@@ -26,12 +27,18 @@ export const useComicsStore = defineStore({
       this.isLoading = true
 
       const comics = await api.comics.get({
-        orderBy: OrderBy.Desc.focDate,
+        orderBy: this.orderBy,
         offset: this.count,
       })
 
       this._comics.push(...comics)
       this.isLoading = false
+    },
+    async refresh() {
+      this._comics = []
+      this.isLoading = false
+
+      await this.fetchMore()
     },
   },
 })
