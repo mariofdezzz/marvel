@@ -3,11 +3,13 @@ import type { MarvelApiResponse } from './types/api'
 import type { Comic } from './types/comics'
 import { OrderBy, type GetComicsParams } from './types/comics/methods'
 
+const baseUrl = import.meta.env.VITE_MARVEL_BASE_URL
+
 export class MarvelApi {
   constructor(private apikey: string) {}
 
   comics = {
-    get: async (params: GetComicsParams = {}): Promise<Comic[]> => {
+    findAll: async (params: GetComicsParams = {}): Promise<Comic[]> => {
       const { orderBy = OrderBy.Asc.onSaleDate } = params
 
       const searchParams = new URLSearchParams(
@@ -19,11 +21,23 @@ export class MarvelApi {
       )
 
       const response: MarvelApiResponse<Comic[]> = await fetch(
-        'https://gateway.marvel.com:443/v1/public/comics?' +
-          searchParams.toString()
+        baseUrl + '/comics?' + searchParams.toString()
       ).then((res) => res.json())
 
       return response.data.results
+    },
+    find: async (id: number): Promise<Comic> => {
+      const searchParams = new URLSearchParams(
+        toURLSearchParams({
+          apikey: this.apikey,
+        })
+      )
+
+      const response: MarvelApiResponse<Comic[]> = await fetch(
+        baseUrl + `/comics/${id}?` + searchParams.toString()
+      ).then((res) => res.json())
+
+      return response.data.results[0]
     },
   }
 }

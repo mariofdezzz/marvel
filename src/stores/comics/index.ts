@@ -26,7 +26,7 @@ export const useComicsStore = defineStore({
 
       this.isLoading = true
 
-      const comics = await api.comics.get({
+      const comics = await api.comics.findAll({
         orderBy: this.orderBy,
         offset: this.count,
       })
@@ -39,6 +39,11 @@ export const useComicsStore = defineStore({
       this.isLoading = false
 
       await this.fetchMore()
+    },
+    async get(id: number): Promise<Comic> {
+      const localComic = this._comics.find((comic) => comic.id === id)
+
+      return localComic ? localComic : api.comics.find(id)
     },
   },
 })
