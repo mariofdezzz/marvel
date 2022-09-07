@@ -1,13 +1,16 @@
 <script setup lang="ts">
 defineProps<{
   title?: string
+  id?: number
 }>()
 </script>
 
 <template>
-  <figure :title="title">
-    <slot></slot>
-  </figure>
+  <router-link :to="`/comics/${id ?? ''}`">
+    <figure :title="title">
+      <slot></slot>
+    </figure>
+  </router-link>
 </template>
 
 <style scoped lang="scss">

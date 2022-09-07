@@ -41,7 +41,12 @@ useIntersectionObserver(
   </div>
 
   <div id="gallery">
-    <ComicCard v-for="(comic, idx) of comics" :key="idx" :title="comic?.title">
+    <ComicCard
+      v-for="(comic, idx) of comics"
+      :key="idx"
+      :title="comic?.title"
+      :id="comic?.id"
+    >
       <ComicCardSkeleton v-if="comic === null" />
 
       <ComicCardThumbnail v-if="comic !== null" :comic="comic" />
