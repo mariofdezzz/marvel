@@ -41,29 +41,32 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div id="filters">
-    <Select
-      :options="orderByOptions"
-      :selected="comicsStore.orderBy"
-      @change="sortComicsBy"
-    />
+  <div>
+    <div id="filters">
+      <Select
+        :options="orderByOptions"
+        :selected="comicsStore.orderBy"
+        @change="sortComicsBy"
+      />
+    </div>
+
+    <div id="gallery">
+      <ComicCard
+        v-for="(comic, idx) of comics"
+        :key="idx"
+        :title="comic?.title"
+        :id="comic?.id"
+      >
+        <ComicCardSkeleton v-if="comic === null" />
+
+        <ComicCardThumbnail v-if="comic !== null" :comic="comic" />
+
+        <ComicCardCaption v-if="comic !== null" :comic="comic" />
+      </ComicCard>
+    </div>
+
+    <div ref="lastImage" id="gallery-end"></div>
   </div>
-
-  <div id="gallery">
-    <ComicCard
-      v-for="(comic, idx) of comics"
-      :key="idx"
-      :title="comic?.title"
-      :id="comic?.id"
-    >
-      <ComicCardSkeleton v-if="comic === null" />
-
-      <ComicCardThumbnail v-if="comic !== null" :comic="comic" />
-
-      <ComicCardCaption v-if="comic !== null" :comic="comic" />
-    </ComicCard>
-  </div>
-  <div ref="lastImage" id="gallery-end"></div>
 </template>
 
 <style scoped lang="scss">

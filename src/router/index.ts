@@ -25,4 +25,20 @@ const router = createRouter({
   ],
 })
 
+router.beforeEach((to, from) => {
+  const fpath = from.path.slice(1)
+  const tpath = to.path.slice(1)
+
+  if (fpath.length > 0 && tpath.length > 0) {
+    if (fpath.startsWith(tpath) || tpath.startsWith(fpath)) {
+      from.meta.leaveToClass = 'fade-leave-to'
+      from.meta.leaveActiveClass = 'fade-leave-active'
+      to.meta.enterFromClass = 'fade-enter-from'
+      to.meta.enterActiveClass = 'fade-enter-active'
+    }
+  }
+
+  return true
+})
+
 export default router
