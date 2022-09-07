@@ -21,8 +21,6 @@ import NavbarLogo from './Navbar/NavbarLogo.vue'
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-
 header {
   top: 0;
   position: sticky;

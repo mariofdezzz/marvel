@@ -15,8 +15,6 @@
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-
 footer {
   padding: 1rem 0;
   border-top: 1px solid $on-bg;

@@ -37,8 +37,6 @@ const selected = computed(() => {
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-
 select {
   min-width: 16ch;
   height: 3.5ch;

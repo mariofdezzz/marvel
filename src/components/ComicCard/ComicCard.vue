@@ -11,8 +11,6 @@ defineProps<{
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-
 figure {
   position: relative;
   display: flex;

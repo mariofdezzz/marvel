@@ -5,8 +5,6 @@
 </template>
 
 <style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-
 #logo {
   font-size: 20px;
   font-weight: 900;
