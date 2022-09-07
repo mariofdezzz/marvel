@@ -1,13 +1,13 @@
 <script setup lang="ts">
+import ComicCard from '@/components/ComicCard/ComicCard.vue'
+import ComicCardCaption from '@/components/ComicCard/ComicCardCaption.vue'
 import ComicCardSkeleton from '@/components/ComicCard/ComicCardSkeleton.vue'
+import ComicCardThumbnail from '@/components/ComicCard/ComicCardThumbnail.vue'
+import Select from '@/components/common/Select.vue'
 import { useComicsStore } from '@/stores/comics/index.js'
 import type { ComicState } from '@/stores/comics/types'
 import { useIntersectionObserver } from '@vueuse/core'
 import { computed, ref } from 'vue'
-import ComicCard from '../components/ComicCard/ComicCard.vue'
-import ComicCardCaption from '../components/ComicCard/ComicCardCaption.vue'
-import ComicCardThumbnail from '../components/ComicCard/ComicCardThumbnail.vue'
-import Select from '../components/common/Select.vue'
 import { orderByOptions } from './ComicsView'
 
 const comicsStore = useComicsStore()
