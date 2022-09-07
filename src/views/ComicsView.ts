@@ -1,5 +1,6 @@
 import { OrderBy } from '@/apis/marvel/types/comics/methods'
 import type { SelectOption } from '@/components/common/Select'
+import type { Ref } from 'vue'
 
 export const orderByOptions: SelectOption[] = [
   {
@@ -19,3 +20,8 @@ export const orderByOptions: SelectOption[] = [
     label: 'Issue Number',
   },
 ]
+
+export interface UseIntersectionObserver {
+  isSupported: Ref<boolean>
+  stop: () => void
+}

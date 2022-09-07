@@ -7,11 +7,12 @@ import Select from '@/components/common/Select.vue'
 import { useComicsStore } from '@/stores/comics/index.js'
 import type { ComicState } from '@/stores/comics/types'
 import { useIntersectionObserver } from '@vueuse/core'
-import { computed, ref } from 'vue'
-import { orderByOptions } from './ComicsView'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { orderByOptions, type UseIntersectionObserver } from './ComicsView'
 
 const comicsStore = useComicsStore()
 const lastImage = ref(null)
+let intersectionObserver: UseIntersectionObserver | null = null
 
 const comics = computed(() => {
   return comicsStore.comics
@@ -22,13 +23,21 @@ function sortComicsBy(orderBy: string) {
   comicsStore.refresh()
 }
 
-useIntersectionObserver(
-  lastImage,
-  () => {
-    comicsStore.fetchMore()
-  },
-  { rootMargin: '400px' }
-)
+onMounted(() => {
+  intersectionObserver = useIntersectionObserver(
+    lastImage,
+    (entry) => {
+      if (!entry[0].isIntersecting) return
+
+      comicsStore.fetchMore()
+    },
+    { rootMargin: '400px' }
+  )
+})
+
+onUnmounted(() => {
+  intersectionObserver?.stop()
+})
 </script>
 
 <template>
