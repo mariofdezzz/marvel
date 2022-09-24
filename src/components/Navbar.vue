@@ -14,7 +14,7 @@ import NavbarLogo from './Navbar/NavbarLogo.vue'
 
         <NavbarLink href="/comics">Comics</NavbarLink>
 
-        <NavbarLink href="/characters">Characters</NavbarLink>
+        <!-- <NavbarLink href="/characters">Characters</NavbarLink> -->
       </nav>
     </div>
   </header>
