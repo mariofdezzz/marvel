@@ -3,6 +3,7 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: $primary;
+    color: $primary !important;
+    fill: $primary !important;
   }
 }

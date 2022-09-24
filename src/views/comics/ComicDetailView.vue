@@ -3,6 +3,7 @@ import type { Comic } from '@/apis/marvel/types/comics'
 import { useComicsStore } from '@/stores/comics'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import ExternalLink from '../../components/common/ExternalLink.vue'
 
 const route = useRoute()
 const comicsStore = useComicsStore()
@@ -13,6 +14,12 @@ const imageSrc = computed(() => {
 
   const { thumbnail } = comic.value
   return thumbnail.path + '.' + thumbnail.extension
+})
+const link = computed(() => {
+  if (comic.value === null) return undefined
+
+  const { urls } = comic.value
+  return urls.find((url) => url.type === 'detail')?.url ?? urls[0].url
 })
 
 onMounted(async () => {
@@ -46,6 +53,10 @@ function titleCase(str: string) {
       <section aria-label="description">
         <p id="description">{{ comic?.description }}</p>
       </section>
+
+      <section id="links" aria-label="links">
+        <ExternalLink :href="link ?? ''" />
+      </section>
     </div>
   </article>
 </template>
@@ -70,6 +81,13 @@ article {
     #description {
       margin-top: 4rem;
       font-size: 0.85em;
+    }
+
+    #links {
+      display: flex;
+      flex-direction: row-reverse;
+      gap: 1rem;
+      margin-top: 1rem;
     }
   }
 }
