@@ -1,7 +1,13 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
-import Navbar from '@/components/Navbar.vue'
+import Breadcrumbs from '@/components/Breadcrumbs.vue'
 import Footer from '@/components/Footer.vue'
+import Navbar from '@/components/Navbar.vue'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+
+const currentRoute = computed(() => {
+  return useRoute().fullPath.split('/').slice(2)
+})
 </script>
 
 <template>
@@ -9,15 +15,17 @@ import Footer from '@/components/Footer.vue'
 
   <main>
     <RouterView v-slot="{ Component, route }">
-      <Transition
+      <TransitionGroup
         :enter-from-class="(route.meta.enterFromClass as string|undefined)"
         :enter-active-class="(route.meta.enterActiveClass as string|undefined)"
         :leave-to-class="(route.meta.leaveToClass as string|undefined)"
         :leave-active-class="(route.meta.leaveActiveClass as string|undefined)"
         mode="out-in"
       >
-        <component :is="Component" />
-      </Transition>
+        <Breadcrumbs v-if="currentRoute.length > 0" :key="'bread'" />
+
+        <component :is="Component" :key="'route'" />
+      </TransitionGroup>
     </RouterView>
   </main>
 
@@ -47,6 +55,9 @@ body {
 
   main {
     grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 }
 
